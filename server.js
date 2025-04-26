@@ -24,7 +24,6 @@ function saveKeys() {
 app.post('/verify', (req, res) => {
   const { key, deviceId } = req.body;
 
-  // must have both
   if (!key || !deviceId) {
     return res.status(400).json({ status: 'error', message: 'Key or device ID missing' });
   }
@@ -39,14 +38,16 @@ app.post('/verify', (req, res) => {
   // First-time activation: bind to this device
   if (!license.activatedAt) {
     license.activatedAt = now;
-    license.expiresAt  = now + (durations[license.type] || 0);
-    license.deviceId  = deviceId;
+    license.expiresAt = now + (durations[license.type] || 0);
+    license.deviceId = deviceId;
     saveKeys();
+    console.log(`🔑 Activated key '${key}' for device '${deviceId}'`);
     return res.json({ status: 'valid', expiresAt: license.expiresAt });
   }
 
   // Reject if different device
   if (license.deviceId && license.deviceId !== deviceId) {
+    console.log(`❌ Device mismatch for key '${key}'. Expected '${license.deviceId}', got '${deviceId}'`);
     return res.json({ status: 'invalid_device' });
   }
 
@@ -60,5 +61,5 @@ app.post('/verify', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`License server running on port ${PORT}`);
+  console.log(`✅ License server running on port ${PORT}`);
 });
