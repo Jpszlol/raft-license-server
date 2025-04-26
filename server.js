@@ -28,11 +28,12 @@ app.post('/verify', (req, res) => {
     return res.status(400).json({ status: 'error', message: 'Key or device ID missing' });
   }
 
-  const license = keys.find(k => k.key === key);
-  if (!license) {
+  const licenseIndex = keys.findIndex(k => k.key === key);
+  if (licenseIndex === -1) {
     return res.json({ status: 'invalid' });
   }
 
+  const license = keys[licenseIndex];
   const now = Date.now();
 
   // First-time activation: bind to this device
@@ -53,6 +54,9 @@ app.post('/verify', (req, res) => {
 
   // Check expiration
   if (now > license.expiresAt) {
+    console.log(`🗑️ Deleting expired key '${key}'`);
+    keys.splice(licenseIndex, 1);   // Delete the expired key
+    saveKeys();                     // Save updated list
     return res.json({ status: 'expired' });
   }
 
