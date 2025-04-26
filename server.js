@@ -64,6 +64,11 @@ app.post('/verify', (req, res) => {
   res.json({ status: 'valid', expiresAt: license.expiresAt });
 });
 
+// ✅ DOWNLOAD CURRENT KEYS (admin tool)
+app.get('/download-keys', (req, res) => {
+  res.json(keys);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ License server running on port ${PORT}`);
 });
