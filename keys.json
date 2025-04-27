@@ -5,5 +5,12 @@
     "activatedAt": null,
     "expiresAt": null,
     "deviceId": null
+  },
+  {
+    "key": "RAFT-30S-TEST-12345",
+    "type": "30s",
+    "activatedAt": null,
+    "expiresAt": null,
+    "deviceId": null
   }
 ]
