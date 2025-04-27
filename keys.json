@@ -1,1 +1,9 @@
-
+[
+  {
+    "key": "RAFT-24H-ABCDE12345",
+    "type": "24h",
+    "activatedAt": null,
+    "expiresAt": null,
+    "deviceId": null
+  }
+]
