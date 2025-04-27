@@ -1,10 +1,9 @@
 [
   {
-    "key": "TEST-30S-KEY",
-    "type": "30s",
+    "key": "TEST-24H",
+    "type": "24h",
     "activatedAt": null,
     "expiresAt": null,
     "deviceId": null
-  },
+  }
 ]
-
