@@ -4,6 +4,14 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// simple admin check: set ADMIN_SECRET in your env
+const requireAdmin = (req, res, next) => {
+  if (req.get('X-ADMIN-SECRET') !== process.env.ADMIN_SECRET) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  next();
+};
+
 // Postgres connection
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -53,7 +61,7 @@ app.post('/verify', async (req, res) => {
 });
 
 // 2) Admin: add a new key
-app.post('/admin/add-key', async (req, res) => {
+app.post('/admin/add-key', requireAdmin, async (req, res) => {
   const { key, type } = req.body;
   if (!key || !type) {
     return res.status(400).json({ error: 'Key and type required' });
@@ -73,7 +81,7 @@ app.post('/admin/add-key', async (req, res) => {
 });
 
 // 3) Admin: revoke (delete) a key
-app.post('/admin/revoke-key', async (req, res) => {
+app.post('/admin/revoke-key', requireAdmin, async (req, res) => {
   const { key } = req.body;
   if (!key) {
     return res.status(400).json({ error: 'Key required' });
