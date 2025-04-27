@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // — Configure Airtable —
-const AIRTABLE_PAT = 'patDpwRNQhSDzsTjy.e8fe23287df466621b388276da4a79387ebc93319fdb93b64c4fdb5dcac4bf25';
+const AIRTABLE_PAT = 'patZcoyuBarvkVHkz.72f83edf9ceb0da95a17f12054936e05b99f480966ed3b26156219d7573ab71d';
 const BASE_ID      = 'app3OoIsiIPxQp3fR';   // your Base ID
 const TABLE_NAME   = 'Keys';
 
