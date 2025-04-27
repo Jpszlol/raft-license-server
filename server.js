@@ -8,9 +8,9 @@ app.use(express.json());
 // Load keys
 let keys = JSON.parse(fs.readFileSync('keys.json'));
 
-// Duration lookup table (for testing: “24h” = 30 seconds)
+// Duration lookup table
 const durations = {
-  "24h": 30 * 1000,            // ⏱️ 30 seconds for quick expiry
+  "24h": 24 * 60 * 60 * 1000,   // ✅ Real 24 hours
   "7d": 7 * 24 * 60 * 60 * 1000,
   "30d": 30 * 24 * 60 * 60 * 1000
 };
