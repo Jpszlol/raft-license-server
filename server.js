@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // — Configure Airtable —
-const AIRTABLE_PAT = 'YOUR_AIRTABLE_PAT_HERE';
+const AIRTABLE_PAT = 'patDpwRNQhSDzsTjy.e8fe23287df466621b388276da4a79387ebc93319fdb93b64c4fdb5dcac4bf25';
 const BASE_ID      = 'app3OoIsiIPxQp3fR';   // your Base ID
 const TABLE_NAME   = 'Keys';
 
@@ -25,7 +25,7 @@ const durations = {
 // Helper to find one record by key
 async function findRecordByKey(key) {
   const records = await base(TABLE_NAME)
-    .select({ filterByFormula: `{Key}='${key}'`, maxRecords: 1 })
+    .select({ filterByFormula: `{Keys}='${key}'`, maxRecords: 1 })
     .firstPage();
   return records[0] || null;
 }
@@ -87,7 +87,7 @@ app.post('/keys', async (req, res) => {
       return res.status(409).json({ status: 'error', message: 'Key already exists' });
     }
     const created = await base(TABLE_NAME).create({
-      'Key':          key,
+      'Keys':         key,
       'Type':         type,
       'Device ID':    null,
       'Activated At': null,
