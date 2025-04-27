@@ -4,17 +4,5 @@
     "type": "24h",
     "activatedAt": null,
     "expiresAt": null
-  },
-  {
-    "key": "RAFT-7D-XYZ12",
-    "type": "7d",
-    "activatedAt": null,
-    "expiresAt": null
-  },
-  {
-    "key": "RAFT-30D-QWERT",
-    "type": "30d",
-    "activatedAt": null,
-    "expiresAt": null
   }
 ]
