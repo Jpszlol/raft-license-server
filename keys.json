@@ -1,9 +1,10 @@
 [
   {
-    "key": "RAFT-24H-SKIPER",
-    "type": "24h",
+    "key": "TEST-30S-KEY",
+    "type": "30s",
     "activatedAt": null,
     "expiresAt": null,
     "deviceId": null
-  }
+  },
+  // …other keys…
 ]
