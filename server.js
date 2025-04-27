@@ -1,12 +1,14 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
 // Load keys
-let keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
+const keysFile = path.join(__dirname, 'keys.json');
+let keys = JSON.parse(fs.readFileSync(keysFile, 'utf8'));
 
 // Duration lookup table
 const durations = {
@@ -17,7 +19,7 @@ const durations = {
 
 // Save updated keys back to file
 function saveKeys() {
-  fs.writeFileSync('keys.json', JSON.stringify(keys, null, 2));
+  fs.writeFileSync(keysFile, JSON.stringify(keys, null, 2));
 }
 
 // Verify license
@@ -52,7 +54,7 @@ app.post('/verify', (req, res) => {
 
 // Download the keys.json file
 app.get('/download-keys', (req, res) => {
-  res.download('keys.json', 'keys.json', err => {
+  res.download(keysFile, 'keys.json', err => {
     if (err) {
       console.error('Download error:', err);
       return res.status(500).send('Could not download keys file');
